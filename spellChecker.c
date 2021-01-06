@@ -59,10 +59,34 @@ void loadDictionary(FILE* file, HashMap* map) {
 	free(word);
 }
 
-/*
- Checks the spelling of the word provded by the user. If the word is spelled incorrectly,
- prints the 5 closest words.
- */
+// Function that runs spellchecker and returns 1 if user enters "quit", returns 0 otherwise
+int runSpellChecker(char* inputBuffer, HashMap* map) {
+
+	printf("Enter a word or enter the word quit to exit the program: ");
+	scanf("%s", inputBuffer);
+
+	for (int i = 0; inputBuffer[i]; i++) {
+		inputBuffer[i] = tolower(inputBuffer[i]);
+	}
+
+	if (strcmp(inputBuffer, "quit") == 0) {
+		return 1;
+	}
+	else if (hashMapContainsKey(map, inputBuffer)) {
+		printf("The word ");
+		printf("%s", inputBuffer);
+		printf(" is spelled correctly.\n");
+	}
+	else {
+		printf("The word ");
+		printf("%s", inputBuffer);
+		printf(" is not spelled correctly.\n");
+	}
+
+	return 0;
+}
+
+// Checks the spelling of the word provided by the user.
 int main(int argc, const char** argv) {
 	HashMap* map = hashMapNew(1000);
 
@@ -80,26 +104,7 @@ int main(int argc, const char** argv) {
 	int quit = 0;
 	while (!quit) {
 
-		printf("Enter a word or enter the word quit to exit the program: ");
-		scanf("%s", inputBuffer);
-
-		for (int i = 0; inputBuffer[i]; i++) {
-			inputBuffer[i] = tolower(inputBuffer[i]);
-		}
-
-		if (strcmp(inputBuffer, "quit") == 0) {
-			quit = 1;
-		}
-		else if (hashMapContainsKey(map, inputBuffer)) {
-			printf("The word ");
-			printf("%s", inputBuffer);
-			printf(" is spelled correctly.\n");
-		}
-		else {
-			printf("The word ");
-			printf("%s", inputBuffer);
-			printf(" is not spelled correctly.\n");
-		}
+		quit = runSpellChecker(inputBuffer, map);
 
 	}
 
