@@ -106,7 +106,7 @@ void hashMapDelete(HashMap* map) {
 	free(map);
 }
 
-/**
+/*
  Returns a pointer to the value of the link with the given key. Returns NULL if
  no link with that key is in the table.
  */
