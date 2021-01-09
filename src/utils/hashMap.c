@@ -108,9 +108,7 @@ void hashMapDelete(HashMap* map) {
 
 /**
  Returns a pointer to the value of the link with the given key. Returns NULL if
- no link with that key is in the table. Use HASH_FUNCTION(key) and the map's 
- capacity to find the index of the correct linked list bucket. Also make sure to 
- search the entire list.
+ no link with that key is in the table.
  */
 int* hashMapGet(HashMap* map, const char* key) {
 	assert(map != NULL);
